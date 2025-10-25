@@ -81,7 +81,7 @@ python gemini_pdf_extractor.py <PDF檔案路徑> [每輪處理頁數] [每輪間
 **範例：**
 
 ```bash
-python gemini_pdf_extractor.py report.pdf 30 10
+python gemini_pdf_extractor.py pdfs/report01.pdf 30 10
 ```
 
 * 預設每輪處理 50 頁。
