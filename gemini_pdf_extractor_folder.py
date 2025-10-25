@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-extract_pdf_text.py
+gemini_pdf_extractor_folder.py
 使用 Google Gemini 2.5 Pro 模型擷取 PDF 中文內容。
 支援 dotenv (.env) 讀取 API 金鑰、外部輸入 PDF 檔案、分批頁數與執行間隔。
 """
@@ -40,9 +40,9 @@ except Exception as e:
 # === 5️⃣ 外部輸入參數 ===
 if len(sys.argv) < 2:
     print("\n📘 使用方式：")
-    print("python extract_pdf_text.py <PDF目錄路徑> [每輪處理頁數] [每輪間隔秒數]\n")
+    print("python gemini_pdf_extractor_folder.py <PDF目錄路徑> [每輪處理頁數] [每輪間隔秒數]\n")
     print("範例：")
-    print("python extract_pdf_text.py ./pdfs 30 10\n")
+    print("python gemini_pdf_extractor_folder.py ./pdfs 30 10\n")
     sys.exit(0)
 
 PDF_DIR = sys.argv[1]
@@ -255,3 +255,4 @@ if __name__ == "__main__":
         print(f"\n🔹 開始處理 PDF：{pdf_file}")
         process_large_pdf(pdf_path, txt_output_file, CHUNK_SIZE, WAIT_SECONDS)
         print(f"🎉 已完成 PDF：{pdf_file}，輸出至 {txt_output_file}")
+
