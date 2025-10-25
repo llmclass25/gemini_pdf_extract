@@ -135,8 +135,6 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10
   )
   ```
 
-  這樣 Gemini 將採用預設最寬鬆模式，不再阻擋高風險內容（如仇恨、色情、危險語句等）。
-
 * **分批處理**
 
   * 避免一次處理整份 PDF 導致請求過大。
