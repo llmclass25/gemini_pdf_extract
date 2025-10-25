@@ -19,14 +19,14 @@
 
 ## 功能說明
 
-### gemini_pdf_extreact.py
+### gemini_pdf_extract.py
 
 * 擷取單一 PDF 文件內容。
 * 將文字、表格及視覺元素（圖表、照片、流程圖等）依規範整理。
 * 支援分批頁數處理與每輪等待時間控制。
 * 使用 **Google Gemini 2.5 Pro** 模型高保真度擷取中文及多語言內容。
 
-### gemini_pdf_extreact_folder.py
+### gemini_pdf_extract_folder.py
 
 * 批次處理資料夾內所有 PDF 文件。
 * 自動生成每個 PDF 的文字輸出檔。
@@ -75,13 +75,13 @@ GOOGLE_API_KEY=你的金鑰
 ### 單一 PDF 擷取
 
 ```bash
-python gemini_pdf_extreact.py <PDF檔案路徑> [每輪處理頁數] [每輪間隔秒數]
+python gemini_pdf_extract.py <PDF檔案路徑> [每輪處理頁數] [每輪間隔秒數]
 ```
 
 **範例：**
 
 ```bash
-python gemini_pdf_extreact.py report.pdf 30 10
+python gemini_pdf_extract.py report.pdf 30 10
 ```
 
 * 預設每輪處理 50 頁。
@@ -94,13 +94,13 @@ python gemini_pdf_extreact.py report.pdf 30 10
 ### 資料夾批次處理
 
 ```bash
-python gemini_pdf_extreact_folder.py <PDF目錄路徑> [每輪處理頁數] [每輪間隔秒數]
+python gemini_pdf_extract_folder.py <PDF目錄路徑> [每輪處理頁數] [每輪間隔秒數]
 ```
 
 **範例：**
 
 ```bash
-python gemini_pdf_extreact_folder.py ./pdfs 30 10
+python gemini_pdf_extract_folder.py ./pdfs 30 10
 ```
 
 * 會自動掃描資料夾內所有 PDF。
