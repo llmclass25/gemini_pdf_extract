@@ -55,7 +55,7 @@ if not os.path.exists(PDF_INPUT_FILENAME):
     sys.exit(1)
 
 base_name = os.path.splitext(os.path.basename(PDF_INPUT_FILENAME))[0]
-TXT_OUTPUT_FILENAME = f"{base_name}_extracted.txt"
+TXT_OUTPUT_FILENAME = os.path.join(os.path.dirname(PDF_INPUT_FILENAME), f"{base_name}_extracted.txt")
 
 print(f"🟢 輸入檔案： {PDF_INPUT_FILENAME}")
 print(f"🟢 每輪處理頁數： {CHUNK_SIZE}")
@@ -247,4 +247,5 @@ if __name__ == "__main__":
     process_large_pdf(PDF_INPUT_FILENAME, TXT_OUTPUT_FILENAME, CHUNK_SIZE, WAIT_SECONDS)
     print(f"\n🎉 任務完成！")
     print(f"📄 已輸出至：{TXT_OUTPUT_FILENAME}")
+
 
