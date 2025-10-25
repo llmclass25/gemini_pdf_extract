@@ -167,5 +167,3 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10
 * 請確保 `.env` 中金鑰正確，否則程式會停止執行。
 
 
-
-你希望我加嗎？
