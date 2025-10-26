@@ -124,22 +124,23 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10 > log.txt 2>&1
   * 使用 `google.generativeai` 連線 Gemini 模型。
   * 安全設定阻擋高風險內容（辱罵、仇恨言論、色情、危險內容）。
 
-  ### ✅ 取消安全設定（進階選項）
+  ### ✅ 啟動安全設定（進階選項）
 
-  若你希望 **Gemini 模型** 不套用任何安全內容過濾，可直接刪除或略過 `safety_settings` 參數設定。
+  若你希望 **Gemini 模型** 套用任何安全內容過濾，可直接更改 `safety_settings` 參數設定。
 
   **修改方法：**
 
   ```python
-  # 原始寫法（包含安全限制）
+  # 原始寫法（即無安全審核機制）
   model = genai.GenerativeModel(
       model_name="gemini-2.5-pro",
-      safety_settings=safety_settings
+      safety_settings=None
   )
 
-  # ✅ 修改後：不設定 safety_settings（即取消安全限制）
+  # ✅ 修改後不設定 safety_settings（啟動安全限制）
   model = genai.GenerativeModel(
-      model_name="gemini-2.5-pro"
+      model_name="gemini-2.5-pro",
+      safety_settings=safety_settings  
   )
   ```
 
