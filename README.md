@@ -82,10 +82,14 @@ python gemini_pdf_extractor.py <PDF檔案路徑> [每輪處理頁數] [每輪間
 
 ```bash
 python gemini_pdf_extractor.py pdfs/report01.pdf 30 10
+
+or
+
+python gemini_pdf_extractor.py pdfs/report01.pdf 30 10 > log.txt 2>&1
 ```
 
-* 預設每輪處理 50 頁。
-* 預設每輪間隔 10 秒。
+* 預設每輪處理 30 頁。
+* 預設每輪間隔 30 秒。
 
 輸出檔案會以 `<PDF檔名>_extracted.txt` 儲存。
 
@@ -101,6 +105,10 @@ python gemini_pdf_extractor_folder.py <PDF目錄路徑> [每輪處理頁數] [�
 
 ```bash
 python gemini_pdf_extractor_folder.py ./pdfs 30 10
+
+or
+
+python gemini_pdf_extractor_folder.py ./pdfs 30 10 > log.txt 2>&1
 ```
 
 * 會自動掃描資料夾內所有 PDF。
