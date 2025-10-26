@@ -32,6 +32,7 @@
 * 自動生成每個 PDF 的文字輸出檔。
 * 同樣支援分批頁數與等待時間設定。
 * 已處理的檔案會自動跳過，避免重複處理。
+* 可同時指定單一 PDF 或整個資料夾。
 
 ---
 
@@ -89,16 +90,15 @@ python gemini_pdf_extractor.py pdfs/report01.pdf 30 10 > log.txt 2>&1
 ```
 
 * 預設每輪處理 30 頁。
-* 預設每輪間隔 30 秒。
-
-輸出檔案會以 `<PDF檔名>_extracted.txt` 儲存。
+* 預設每輪間隔 10 秒。
+* 輸出檔案會以 `<PDF檔名>_extracted.txt` 儲存，與 PDF 同目錄。
 
 ---
 
 ### 資料夾批次處理
 
 ```bash
-python gemini_pdf_extractor_folder.py <PDF目錄路徑> [每輪處理頁數] [每輪間隔秒數]
+python gemini_pdf_extractor_folder.py <PDF目錄路徑或單一PDF路徑> [每輪處理頁數] [每輪間隔秒數]
 ```
 
 **範例：**
@@ -108,12 +108,13 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10
 
 or
 
-python gemini_pdf_extractor_folder.py ./pdfs 30 10 > log.txt 2>&1
+python gemini_pdf_extractor_folder.py ./pdfs/report01.pdf 30 10 > log.txt 2>&1
 ```
 
-* 會自動掃描資料夾內所有 PDF。
+* 會自動掃描資料夾內所有 PDF，或可指定單一 PDF。
 * 已存在的 `_extracted.txt` 檔案會跳過處理。
 * 每個 PDF 都會輸出對應的文字檔。
+* 支援自訂每輪處理頁數與等待秒數，避免請求過大。
 
 ---
 
@@ -122,22 +123,19 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10 > log.txt 2>&1
 * **API 設定與安全性**
 
   * 使用 `google.generativeai` 連線 Gemini 模型。
-  * 安全設定阻擋高風險內容（辱罵、仇恨言論、色情、危險內容）。
+  * 程式預設 `safety_settings=None`，即 **不啟用安全過濾**。
+  * 若希望套用安全內容過濾，可自訂 `safety_settings` 參數。
 
-  ### ✅ 啟動安全設定（進階選項）
-
-  若你希望 **Gemini 模型** 套用任何安全內容過濾，可直接更改 `safety_settings` 參數設定。
-
-  **修改方法：**
+  **範例修改方法：**
 
   ```python
-  # 原始寫法（即無安全審核機制）
+  # 原始寫法（預設無安全審核）
   model = genai.GenerativeModel(
       model_name="gemini-2.5-pro",
       safety_settings=None
   )
 
-  # ✅ 修改後不設定 safety_settings（啟動安全限制）
+  # 若希望啟用安全限制
   model = genai.GenerativeModel(
       model_name="gemini-2.5-pro",
       safety_settings=safety_settings  
@@ -147,12 +145,12 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10 > log.txt 2>&1
 * **分批處理**
 
   * 避免一次處理整份 PDF 導致請求過大。
-  * 使用者可自訂每輪頁數與等待秒數。
+  * 使用者可自訂每輪頁數與等待秒數（預設 30 頁、10 秒）。
 
 * **多輪對話處理**
 
-  * 第一輪建立基本文檔結構。
-  * 後續輪次接續處理未完成頁面，保持章節與段落編號連續。
+  * 每批獨立呼叫模型，保持小節及段落編號連續。
+  * 支援跨頁段落合併與頁碼標註。
 
 * **段落與元素編號規則**
 
@@ -193,5 +191,6 @@ python gemini_pdf_extractor_folder.py ./pdfs 30 10 > log.txt 2>&1
 * 若 PDF 包含圖片或手寫內容，Gemini 模型會嘗試文字描述，但效果依模型理解能力而定。
 * API 調用次數受金鑰限制，建議分批處理大型 PDF。
 * 請確保 `.env` 中金鑰正確，否則程式會停止執行。
+
 
 
